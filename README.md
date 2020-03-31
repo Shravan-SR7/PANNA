@@ -1,2 +1,6 @@
 # PANNA_Login
-register and login, flask and mongoDB
+Simple Register and Login system using
+
+1. Html and css
+2. Flask
+3. Mongo Db (Local)
