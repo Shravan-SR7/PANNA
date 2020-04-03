@@ -16,7 +16,11 @@
             </form>
             <br>
             <div>
-                Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.
+             <pre>
+             Don't have an account?
+            <a href="{{ url_for('register') }}"> Sign up here </a>.
+            {{send}}
+            </pre>
             </div>
         </div>
     </div>
