@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="data:,">
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+
+.button1:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+</style>
+</head>
+<body>
+
+<h2 align="center" >SLOTS</h2>
+<p>{{ s1.day }} / {{ s1.month }} / {{s1.year}}</p>
+
+<button class="button button1">4-5</button>
+<button class="button button1">5-6</button>
+<button class="button button1">6-7</button>
+<button class="button button1">7-8</button>
+<button class="button button1">8-9</button>
+<button class="button button1">9-10</button>
+
+<p>{{ s2.day }} / {{ s2.month }} / {{s2.year}}</p>
+
+<button class="button button1">4-5</button>
+<button class="button button1">5-6</button>
+<button class="button button1">6-7</button>
+<button class="button button1">7-8</button>
+<button class="button button1">8-9</button>
+<button class="button button1">9-10</button>
+
+<p>{{ s3.day }} / {{ s3.month }} / {{s3.year}}</p>
+
+<button class="button button1">4-5</button>
+<button class="button button1">5-6</button>
+<button class="button button1">6-7</button>
+<button class="button button1">7-8</button>
+<button class="button button1">8-9</button>
+<button class="button button1">9-10</button>
+
+<p> Enter the slot you want to play in!</p>
+<form method=POST action="/confirmbook">
+  <div class="form-group">
+      <label for="exampleInputEmail1">SLOT</label>
+      <input type="text" class="form-control" name="slot" placeholder="slot">
+  </div>
+
+  <div class="form-group">
+      <label for="exampleInputPassword1">DAY</label>
+      <input type="text" class="form-control" name="day" placeholder="day">
+  </div>
+
+<div class="form-group">
+    <label for="exampleInputPassword1">MONTH</label>
+    <input type="text" class="form-control" name="month" placeholder="month">
+</div>
+
+<div class="form-group">
+  <label for="exampleInputPassword1">YEAR</label>
+  <input type="text" class="form-control" name="year" placeholder="year">
+</div>
+
+  <button type="submit" >Log In</button>
+</form>
+{{ s }}
+</body>
+</html>
