@@ -1,6 +1,9 @@
 PANNA
 A sport ground booking web application
 
+Fun fact : Panna is a modified form of a football game, it is played 1vs1 in a small cage. 
+Players nutmeg each other and move ahead to score.
+
 It consists of
 1. Register page
 
