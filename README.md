@@ -14,7 +14,7 @@ Data Showing,
 
     1. link to show user details
     2. link to show users previous bookings
-    3. link to show current user credits
+    3. link to recharge current credits
    
 functions,
     
