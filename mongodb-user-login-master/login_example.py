@@ -6,7 +6,6 @@ import pytz
 from datetime import datetime
 from datetime import timedelta
 
-
 app=Flask(__name__)
 
 app.config['MONGO_DBNAME']='mongologin'
@@ -106,10 +105,19 @@ def register():
 
 @app.route('/credit', methods = ['POST', 'GET'])
 def credit():
-    users = client.db.users
-    login_user=users.find_one({'name': session['username']})
-    s1=login_user['credits'] 
-    return render_template("credits.html",s=s1)
+        return render_template('credits.html')
+
+@app.route('/updatemsg', methods = ['POST', 'GET'])
+def updatemsg():
+    if request.method == 'POST' :
+        x= request.form["r"]
+        try:
+            val = int(x)
+        except ValueError:
+            return render_template('credits.html',msg="ENTER VALID RECHARGE AMOUNT")
+        updatecredits(val)
+        msg="SUCCESFULLY RECHARGED"
+        return render_template('credits.html',msg=msg) 
 
 @app.route('/book',methods = ['POST', 'GET'])
 def book():
@@ -180,24 +188,31 @@ def successbook():
        month=int(temp_obj['month'])
        year=int(temp_obj['year'])
 
-       book = client.db.book
-       user_book=client.db.user_book
-       book.insert({'slot': slot,'day':day,'month':month,'year':year}) 
-       user_book.insert({'username':session['username'],'slot': slot,'day':day,'month':month,'year':year}) 
-       updatecredits()
-
-       s= "SUCCESFULLY BOOKED"
+       x= -1000
+       success = updatecredits(x)
+       if success == 1 :
+            book = client.db.book
+            user_book=client.db.user_book
+            book.insert({'slot': slot,'day':day,'month':month,'year':year}) 
+            user_book.insert({'username':session['username'],'slot': slot,'day':day,'month':month,'year':year}) 
+            s="SUCCESFULLY BOOKED"
+       else :
+            s="INSUFFECIENT CREDIT BALANCE, PLEASE RECHARGE AND BOOK"
        return render_template('confirmbooking.html',s=s)
 
-def updatecredits():
+def updatecredits(x):
     u=client.db.users
     for i in u.find({'name': session['username']}):
         temp=i
         break
-    
-    u.update({"_id" : temp["_id"]},
-    {"credits" : temp["credits"] - 1000,"name":temp["name"],"password":temp["password"],"email":temp["email"],"address":temp["address"]})
-    return 
+    x=int(x)
+    new_credits = temp["credits"] + x
+    if new_credits < 0 :
+         return 2
+    else :
+        u.update({"_id" : temp["_id"]},
+        {"credits" : temp["credits"] + x,"name":temp["name"],"password":temp["password"],"email":temp["email"],"address":temp["address"]})
+        return 1
 
 @app.route('/user_details',methods = ['POST', 'GET'])
 def user_details():
